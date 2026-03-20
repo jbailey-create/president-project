@@ -3,20 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>President Project Hub</title>
+<title>President Project Hub v3</title>
 
 <style>
 body {
   font-family: 'Segoe UI', sans-serif;
   margin:0;
-  background: linear-gradient(135deg,#1e3a8a,#3b82f6);
+  background:
+    linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+    url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/White_House_north_and_south_sides.jpg/1280px-White_House_north_and_south_sides.jpg');
+  background-size: cover;
+  background-attachment: fixed;
 }
 
+/* HEADER */
 header {
   background:#111827;
   color:white;
   padding:20px;
   text-align:center;
+  letter-spacing:1px;
 }
 
 /* PRESIDENT BAR */
@@ -28,18 +34,21 @@ header {
 .pres-track {
   display:inline-block;
   padding:10px;
-  animation: scroll 25s linear infinite;
   white-space:nowrap;
+  animation: scroll 35s linear infinite;
 }
 @keyframes scroll {
   from { transform: translateX(100%); }
   to { transform: translateX(-100%); }
 }
 
+/* NAV */
 nav {
   background:#111827;
   padding:10px;
   text-align:center;
+  position:sticky;
+  top:0;
 }
 nav a {
   color:white;
@@ -48,14 +57,31 @@ nav a {
   font-weight:bold;
 }
 
+/* BRIEFING CARDS */
 section {
-  background:white;
-  margin:20px auto;
+  background:#ffffff;
+  margin:25px auto;
   padding:20px;
   max-width:900px;
-  border-radius:10px;
+  border-radius:8px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.3);
+  border-left:6px solid #1e3a8a;
 }
 
+/* HEADER STRIP */
+.section-title {
+  border-bottom:2px solid #1e3a8a;
+  padding-bottom:5px;
+  font-weight:bold;
+}
+
+/* INPUTS */
+input, select {
+  padding:8px;
+  margin:5px;
+}
+
+/* BUTTON */
 button {
   padding:10px;
   background:#2563eb;
@@ -65,6 +91,7 @@ button {
   cursor:pointer;
 }
 
+/* PROGRESS */
 .progress-bar {
   background:#ddd;
   border-radius:10px;
@@ -77,9 +104,11 @@ button {
   text-align:center;
 }
 
-input, select {
-  padding:8px;
-  margin:5px;
+/* TOP INPUT BAR */
+.student-bar {
+  text-align:center;
+  background:#e0f2fe;
+  padding:10px;
 }
 </style>
 </head>
@@ -87,17 +116,15 @@ input, select {
 <body>
 
 <header>
-<h1>🇺🇸 President Project Hub</h1>
+<h1>🇺🇸 PRESIDENT PROJECT BRIEFING HUB</h1>
 <p>Think like a historian. Build your argument.</p>
 </header>
 
-<!-- STUDENT PRESIDENT INPUT -->
-<div style="text-align:center; padding:10px; background:#e0f2fe;">
-  <strong>My President:</strong>
-  <input id="studentPresident" placeholder="Type your assigned president">
+<div class="student-bar">
+<strong>My President:</strong>
+<input id="studentPresident" placeholder="Type your assigned president">
 </div>
 
-<!-- PRESIDENT SCROLL -->
 <div class="pres-bar">
 <div class="pres-track">
 🇺🇸 Andrew Jackson 🇺🇸 Millard Fillmore 🇺🇸 Franklin Pierce 🇺🇸 Abraham Lincoln 🇺🇸 Andrew Johnson 🇺🇸 Ulysses S. Grant 🇺🇸 Grover Cleveland 🇺🇸 William McKinley 🇺🇸 Theodore Roosevelt 🇺🇸 Woodrow Wilson 🇺🇸 Warren Harding 🇺🇸 Calvin Coolidge 🇺🇸 Herbert Hoover 🇺🇸 Franklin D. Roosevelt 🇺🇸 Harry Truman 🇺🇸 Dwight Eisenhower 🇺🇸 John F. Kennedy 🇺🇸 Lyndon B. Johnson 🇺🇸 Ronald Reagan 🇺🇸 George Bush Sr. 🇺🇸 Bill Clinton 🇺🇸 George Bush 🇺🇸 Barack Obama 🇺🇸
@@ -114,17 +141,17 @@ input, select {
 </nav>
 
 <section id="overview">
-<h2>Essential Question</h2>
-<p><strong>How did your president affect people's rights and freedoms — and what does this say about their legacy?</strong></p>
+<h2 class="section-title">📄 Mission Briefing</h2>
+<p><strong>Essential Question:</strong><br>
+How did your president affect people's rights and freedoms — and what does this say about their legacy?</p>
 </section>
 
 <section id="thesis">
-<h2>Thesis Generator</h2>
+<h2 class="section-title">✍️ Thesis Builder</h2>
 
 <select id="impact">
 <option value="helped">Helped</option>
 <option value="harmed">Harmed</option>
-<option value="both helped and harmed">Both</option>
 </select>
 
 <input id="group" placeholder="Group affected">
@@ -138,7 +165,8 @@ input, select {
 </section>
 
 <section id="checklist">
-<h2>Checklist</h2>
+<h2 class="section-title">📊 Progress Checklist</h2>
+
 <ul id="list">
 <li><input type="checkbox" onchange="prog()"> Thesis complete</li>
 <li><input type="checkbox" onchange="prog()"> Research done</li>
@@ -153,7 +181,7 @@ input, select {
 </section>
 
 <section id="timeline">
-<h2>Timeline</h2>
+<h2 class="section-title">🗓 Timeline</h2>
 <ul>
 <li>April 8-9: Intro Notecards</li>
 <li>April 20: Body Notecards</li>
@@ -163,7 +191,7 @@ input, select {
 </section>
 
 <section id="rubric">
-<h2>Rubric</h2>
+<h2 class="section-title">📋 Evaluation Rubric</h2>
 <ul>
 <li>Content & Thinking (20)</li>
 <li>Organization (20)</li>
@@ -174,8 +202,10 @@ input, select {
 </section>
 
 <section id="chatbot">
-<h2>Coach Bot 🤖</h2>
+<h2 class="section-title">🤖 Coach Bot</h2>
+
 <div id="chat"></div>
+
 <input id="msg" placeholder="Ask a question...">
 <button onclick="bot()">Send</button>
 </section>
@@ -206,10 +236,10 @@ let r="";
 
 // FINAL CHECKER
 if(m.toLowerCase().includes("check my work") || m.toLowerCase().includes("am i done")){
-  r="Before you submit, check:\n- Does your thesis clearly say helped/harmed AND include 3 arguments?\n- Did you explain what group was affected?\n- Did you include specific evidence (laws, actions)?\n- Are your slides in your own words?\n- Are you ready to present without reading?";
+  r="Before you submit:\n- Thesis = helped/harmed + 3 arguments?\n- Group clearly explained?\n- Evidence included (laws/actions)?\n- Slides in your own words?\n- Ready to present without reading?";
 }
 
-// COPY DETECTION
+// COPY CHECK
 else if(m.length>120){
   r="That looks copied 🚫. Put it in your own words.";
 }
@@ -219,7 +249,7 @@ else if(m.toLowerCase().includes("thesis")){
   r="Does your thesis include helped/harmed, a group, and 3 arguments?";
 }
 
-// GENERAL COACHING
+// GENERAL
 else{
   r="What group was affected? What evidence proves it?";
 }
