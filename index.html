@@ -4,194 +4,100 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>President Project Hub</title>
+
 <style>
 body {
   font-family: 'Segoe UI', sans-serif;
   margin:0;
-  background:#0f172a;
-}
-
-/* President background layer */
-/* President background grid */
-.bg-presidents {
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  z-index:-1;
-  opacity:0.2;
-  display:grid;
-  grid-template-columns: repeat(auto-fill, 150px);
-  gap:10px;
-  padding:10px;
-}
-
-.bg-presidents img {
-  width:150px;
-  height:150px;
-  object-fit:cover;
-  border-radius:10px;
-  filter:grayscale(20%);
-}
-
-@keyframes gradientBG {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  background: linear-gradient(135deg,#1e3a8a,#3b82f6);
+  color:#111;
 }
 
 header {
-  background: rgba(0,0,0,0.7);
+  background:#111827;
   color:white;
-  padding:30px;
+  padding:20px;
   text-align:center;
-  backdrop-filter: blur(6px);
 }
 
-header::after {
-  content:"";
-  display:block;
-  height:120px;
-  background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Flag_of_the_United_States.svg/320px-Flag_of_the_United_States.svg.png');
-  background-size:cover;
-  opacity:0.2;
-  margin-top:15px;
+/* PRESIDENT BAR */
+.pres-bar {
+  background:#000;
+  color:white;
+  overflow:hidden;
+  white-space:nowrap;
+}
+.pres-track {
+  display:inline-block;
+  padding:10px;
+  animation: scroll 20s linear infinite;
+  font-size:18px;
+}
+@keyframes scroll {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-100%); }
 }
 
 nav {
   background:#111827;
-  padding:12px;
+  padding:10px;
   text-align:center;
-  position:sticky;
-  top:0;
-  z-index:1000;
 }
-
 nav a {
   color:white;
   margin:10px;
   text-decoration:none;
   font-weight:bold;
-  transition:0.3s;
-}
-
-nav a:hover {
-  color:#22c55e;
 }
 
 section {
-  background: rgba(255,255,255,0.95);
-  margin:25px auto;
-  padding:25px;
-  max-width:950px;
-  border-radius:20px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.2);
-  transition: transform 0.2s;
-}
-
-section:hover {
-  transform: scale(1.01);
-}
-
-h2::before {
-  content:"⭐ ";
-}
-
-ul {
-  line-height:1.8;
+  background:white;
+  margin:20px auto;
+  padding:20px;
+  max-width:900px;
+  border-radius:10px;
 }
 
 button {
-  background: linear-gradient(45deg, #2563eb, #22c55e);
+  padding:10px;
+  background:#2563eb;
   color:white;
   border:none;
-  padding:10px 15px;
-  border-radius:10px;
+  border-radius:6px;
   cursor:pointer;
-  transition:0.3s;
 }
 
-button:hover {
-  transform: scale(1.08);
-}
-
+/* PROGRESS */
 .progress-bar {
-  width:100%;
-  background:#e5e7eb;
+  background:#ddd;
   border-radius:10px;
-  overflow:hidden;
 }
-
 .progress-fill {
+  background:#22c55e;
   height:20px;
   width:0%;
-  background:#22c55e;
+  color:white;
   text-align:center;
-  color:white;
-  font-size:12px;
-}
-
-input, select {
-  padding:8px;
-  margin:5px;
-  border-radius:8px;
-  border:1px solid #ccc;
-}
-
-.badge {
-  display:inline-block;
-  background:#22c55e;
-  color:white;
-  padding:5px 10px;
-  border-radius:20px;
-  margin:5px;
-  font-size:12px;
-}
-
-.pres-row {
-  display:flex;
-  gap:10px;
-  overflow-x:auto;
-  margin-top:10px;
-}
-
-.pres-row img {
-  height:80px;
-  border-radius:10px;
 }
 </style>
 </head>
-<body>
 
-<div class="bg-presidents">
-<img src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Abraham_Lincoln.jpg">
-<img src="https://upload.wikimedia.org/wikipedia/commons/5/56/FDR_1944_Color_Portrait.jpg">
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/32/JFK_White_House_color_photo_portrait.jpg">
-<img src="https://upload.wikimedia.org/wikipedia/commons/8/8d/President_Barack_Obama.jpg">
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Theodore_Roosevelt.jpg">
-<img src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Abraham_Lincoln.jpg">
-<img src="https://upload.wikimedia.org/wikipedia/commons/5/56/FDR_1944_Color_Portrait.jpg">
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/32/JFK_White_House_color_photo_portrait.jpg">
-<img src="https://upload.wikimedia.org/wikipedia/commons/8/8d/President_Barack_Obama.jpg">
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Theodore_Roosevelt.jpg">
-</div>
+<body>
 
 <header>
 <h1>🇺🇸 President Project Hub</h1>
 <p>Think like a historian. Build your argument.</p>
-<div class="pres-row">
-<img src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Abraham_Lincoln.jpg">
-<img src="https://upload.wikimedia.org/wikipedia/commons/5/56/FDR_1944_Color_Portrait.jpg">
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/32/JFK_White_House_color_photo_portrait.jpg">
-<img src="https://upload.wikimedia.org/wikipedia/commons/8/8d/President_Barack_Obama.jpg">
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Theodore_Roosevelt.jpg">
-</div>
 </header>
+
+<div class="pres-bar">
+  <div class="pres-track">
+    🇺🇸 Lincoln 🇺🇸 FDR 🇺🇸 JFK 🇺🇸 Obama 🇺🇸 Teddy Roosevelt 🇺🇸 Civil Rights 🇺🇸 Freedom 🇺🇸 Equality 🇺🇸
+  </div>
+</div>
 
 <nav>
 <a href="#overview">Overview</a>
-<a href="#thesis">Thesis Builder</a>
+<a href="#thesis">Thesis</a>
 <a href="#checklist">Checklist</a>
 <a href="#timeline">Timeline</a>
 <a href="#rubric">Rubric</a>
@@ -201,48 +107,38 @@ input, select {
 <section id="overview">
 <h2>Essential Question</h2>
 <p><strong>How did your president affect people's rights and freedoms — and what does this say about their legacy?</strong></p>
-<p>Your job: Show how your president HELPED or HARMED rights using evidence.</p>
 </section>
 
 <section id="thesis">
 <h2>Thesis Generator</h2>
-<p>Build your thesis with 3 arguments (your 3 prongs!)</p>
 
 <select id="impact">
 <option value="helped">Helped</option>
 <option value="harmed">Harmed</option>
-<option value="both helped and harmed">Both Helped and Harmed</option>
+<option value="both helped and harmed">Both</option>
 </select>
 
-<input id="group" placeholder="Which group? (ex: African Americans)">
-<input id="arg1" placeholder="Argument 1 (ex: law or action)">
-<input id="arg2" placeholder="Argument 2">
-<input id="arg3" placeholder="Argument 3">
+<input id="group" placeholder="Group affected">
+<input id="a1" placeholder="Argument 1">
+<input id="a2" placeholder="Argument 2">
+<input id="a3" placeholder="Argument 3">
 
-<button onclick="generateThesis()">Build Thesis</button>
+<button onclick="buildThesis()">Generate Thesis</button>
 
-<p id="thesisOutput" style="margin-top:10px; font-weight:bold;"></p>
+<p id="out"></p>
 </section>
 
 <section id="checklist">
-<h3>Level Up Progress 🎮</h3>
-<div class="badge">Historian Level 1</div>
 <h2>Checklist</h2>
-<ul id="checklistItems">
-<li><input type="checkbox" onchange="updateProgress()"> Choose President</li>
-<li><input type="checkbox" onchange="updateProgress()"> 5 Intro Notecards</li>
-<li><input type="checkbox" onchange="updateProgress()"> Thesis Statement</li>
-<li><input type="checkbox" onchange="updateProgress()"> 15 Body Notecards</li>
-<li><input type="checkbox" onchange="updateProgress()"> 5 Sources (1 book)</li>
-<li><input type="checkbox" onchange="updateProgress()"> Slides Created</li>
-<li><input type="checkbox" onchange="updateProgress()"> Evidence of Rights</li>
-<li><input type="checkbox" onchange="updateProgress()"> Practice</li>
-<li><input type="checkbox" onchange="updateProgress()"> Submit May 1</li>
+<ul id="list">
+<li><input type="checkbox" onchange="prog()"> Thesis complete</li>
+<li><input type="checkbox" onchange="prog()"> Research done</li>
+<li><input type="checkbox" onchange="prog()"> Slides created</li>
+<li><input type="checkbox" onchange="prog()"> Practice</li>
 </ul>
 
-<h3>Progress Tracker</h3>
 <div class="progress-bar">
-<div class="progress-fill" id="progressFill">0%</div>
+<div class="progress-fill" id="bar">0%</div>
 </div>
 </section>
 
@@ -257,112 +153,49 @@ input, select {
 </section>
 
 <section id="rubric">
-<h2>Presentation Rubric</h2>
+<h2>Rubric</h2>
 <ul>
-<li><strong>Content & Historical Thinking (20):</strong> Shows how rights were helped/harmed with strong understanding</li>
-<li><strong>Organization (20):</strong> Clear intro, thesis, 3 prongs, and conclusion</li>
-<li><strong>Evidence (20):</strong> Uses accurate facts and examples to support ideas</li>
-<li><strong>Visuals (20):</strong> Slides support ideas and are not overcrowded</li>
-<li><strong>Presentation (20):</strong> Speaks clearly and in own words</li>
-</ul>
-<p><strong>Total: /100</strong></p>
-</section>
-
-<section id="studentChecklist">
-<h2>Student Success Checklist ✅</h2>
-<ul>
-<li><input type="checkbox"> I clearly answered the essential question</li>
-<li><input type="checkbox"> My thesis states if my president helped, harmed, or both</li>
-<li><input type="checkbox"> My thesis includes 3 clear arguments (prongs)</li>
-<li><input type="checkbox"> I focused on a specific group (or groups) of people</li>
-<li><input type="checkbox"> I included strong evidence (laws, actions, events)</li>
-<li><input type="checkbox"> I explained HOW rights were affected</li>
-<li><input type="checkbox"> I considered different perspectives (not just one side)</li>
-<li><input type="checkbox"> My slides are clear and not full of text</li>
-<li><input type="checkbox"> I used my own words (no copying!)</li>
-<li><input type="checkbox"> I practiced speaking without reading</li>
+<li>Content & Thinking (20)</li>
+<li>Organization (20)</li>
+<li>Evidence (20)</li>
+<li>Visuals (20)</li>
+<li>Presentation (20)</li>
 </ul>
 </section>
 
 <section id="chatbot">
 <h2>Coach Bot 🤖</h2>
-<p>This bot helps you THINK. No copying!</p>
-<div id="chatbox" style="height:250px; overflow:auto; border:1px solid #ccc; padding:10px;"></div>
-<input id="userInput" style="width:70%; padding:10px;">
-<button type="button" onclick="sendMessage()">Send</button>
+<div id="chat"></div>
+<input id="msg" placeholder="Ask a question...">
+<button onclick="bot()">Send</button>
 </section>
 
 <script>
-function generateThesis(){
-let impact=document.getElementById('impact').value;
-let group=document.getElementById('group').value;
-let a1=document.getElementById('arg1').value;
-let a2=document.getElementById('arg2').value;
-let a3=document.getElementById('arg3').value;
-
-let thesis=`This presentation argues that this president ${impact} the rights and freedoms of ${group} because of ${a1}, ${a2}, and ${a3}, which shaped their overall legacy.`;
-
-document.getElementById('thesisOutput').innerText=thesis;
-} the rights and freedoms of ${group} through ${action}, which shaped their overall legacy.`;
-document.getElementById('thesisOutput').innerText=thesis;
+function buildThesis(){
+let t=`This presentation argues that this president ${impact.value} the rights of ${group.value} because of ${a1.value}, ${a2.value}, and ${a3.value}.`;
+out.innerText=t;
 }
 
-function updateProgress(){
-let checkboxes=document.querySelectorAll('#checklistItems input');
-let checked=0;
-checkboxes.forEach(cb=>{ if(cb.checked) checked++; });
-let percent=Math.round((checked/checkboxes.length)*100);
-let bar=document.getElementById('progressFill');
-bar.style.width=percent+'%';
-bar.innerText=percent+'%';
+function prog(){
+let boxes=document.querySelectorAll('#list input');
+let done=[...boxes].filter(x=>x.checked).length;
+let pct=Math.round(done/boxes.length*100);
+bar.style.width=pct+'%';
+bar.innerText=pct+'%';
 }
 
-function sendMessage(){
-let input=document.getElementById('userInput');
-let chat=document.getElementById('chatbox');
-let msg=input.value.trim();
+function bot(){
+let m=msg.value.trim();
+if(!m) return;
 
-if(!msg){
-alert("Type a question first!");
-return;
-}
+chat.innerHTML += "<p><b>You:</b> "+m+"</p>";
 
-chat.innerHTML += "<p><b>You:</b> " + msg + "</p>";
+let r = "What group was affected? What evidence proves it?";
+if(m.length>120) r = "That looks copied. Put it in your own words.";
+if(m.toLowerCase().includes("thesis")) r = "Does your thesis include 3 arguments and a group?";
 
-let res="";
-
-if(msg.length>150){
-res="That looks copied 🚫. Try rewriting it in your own words.";
-}
-else if(msg.toLowerCase().includes("thesis")){
-res="Does your thesis include 3 arguments and a group affected?";
-}
-else if(msg.toLowerCase().includes("done")){
-res="Nice work—but who might disagree with your claim?";
-}
-else{
-res="What group was affected? What evidence proves it?";
-}
-
-chat.innerHTML += "<p><b>Coach Bot:</b> " + res + "</p>";
-chat.scrollTop = chat.scrollHeight;
-input.value = "";
-}</p>`;
-
-let res="";
-if(msg.length>150){
-res="That looks copied 🚫. Try rewriting it in your own words.";
-}
-else if(msg.toLowerCase().includes("thesis")){
-res="Does your thesis clearly say helped or harmed AND include a group + evidence?";
-}
-else{
-res="What group was affected? What evidence proves it?";
-}
-
-chat.innerHTML+=`<p><b>Coach Bot:</b> ${res}</p>`;
-chat.scrollTop=chat.scrollHeight;
-input.value="";
+chat.innerHTML += "<p><b>Coach Bot:</b> "+r+"</p>";
+msg.value="";
 }
 </script>
 
