@@ -9,11 +9,15 @@ body {
   font-family: 'Segoe UI', sans-serif;
   margin:0;
   background:
-    linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-    url('https://upload.wikimedia.org/wikipedia/commons/5/5d/Abraham_Lincoln.jpg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+    linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+    url('https://upload.wikimedia.org/wikipedia/commons/5/5d/Abraham_Lincoln.jpg'),
+    url('https://upload.wikimedia.org/wikipedia/commons/5/56/FDR_1944_Color_Portrait.jpg'),
+    url('https://upload.wikimedia.org/wikipedia/commons/3/32/JFK_White_House_color_photo_portrait.jpg'),
+    url('https://upload.wikimedia.org/wikipedia/commons/8/8d/President_Barack_Obama.jpg'),
+    url('https://upload.wikimedia.org/wikipedia/commons/3/3c/Theodore_Roosevelt.jpg');
+  background-size: 250px 250px, 250px 250px, 250px 250px, 250px 250px, 250px 250px;
+  background-repeat: repeat;
+  background-blend-mode: overlay;
 }
 
 @keyframes gradientBG {
