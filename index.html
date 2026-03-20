@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>President Project Hub v5</title>
+<title>President Project Hub v6</title>
 
 <style>
 body {
@@ -16,7 +16,6 @@ body {
   background-attachment: fixed;
 }
 
-/* HEADER */
 header {
   background:#111827;
   color:white;
@@ -56,7 +55,7 @@ nav a {
   font-weight:bold;
 }
 
-/* BRIEFING CARDS */
+/* CARDS */
 section {
   background:#ffffff;
   margin:25px auto;
@@ -67,19 +66,16 @@ section {
   border-left:6px solid #1e3a8a;
 }
 
-/* TITLES */
 .section-title {
   border-bottom:2px solid #1e3a8a;
   padding-bottom:5px;
 }
 
-/* INPUTS */
 input, select {
   padding:8px;
   margin:5px;
 }
 
-/* BUTTON */
 button {
   padding:10px;
   background:#2563eb;
@@ -89,7 +85,6 @@ button {
   cursor:pointer;
 }
 
-/* PROGRESS */
 .progress-bar {
   background:#ddd;
   border-radius:10px;
@@ -102,7 +97,6 @@ button {
   text-align:center;
 }
 
-/* TOP BAR */
 .student-bar {
   text-align:center;
   background:#e0f2fe;
@@ -222,39 +216,34 @@ bar.innerText=pct+'%';
 }
 
 function bot(){
-let m=msg.value.trim();
+let m = msg.value.trim();
 if(!m) return;
 
-let pres=document.getElementById("studentPresident").value;
-let lower=m.toLowerCase();
+let pres = document.getElementById("studentPresident").value;
+let lower = m.toLowerCase();
 
-chat.innerHTML += "<p><b>You:</b> "+m+"</p>";
+chat.innerHTML += "<p><b>You:</b> " + m + "</p>";
 
-let r="";
-
-// FINAL CHECKER
-if(lower.includes("check") || lower.includes("done")){
-  r="Before you submit:\n- Thesis = helped/harmed + 3 arguments?\n- Group clearly explained?\n- Evidence included?\n- Slides in your own words?\n- Ready to present without reading?";
-}
+let r = "";
 
 // COPY CHECK
-else if(m.length > 120){
-  r="That looks like copied text 🚫. Explain it in your own words.";
+if(m.length > 120){
+  r = "That looks like copied text 🚫. Explain that idea in your own words—what does it mean?";
 }
 
 // WHAT DID THEY DO
 else if(lower.includes("what did")){
-  r="Start with actions. What laws, decisions, or events is your president known for?";
+  r = "Start with actions. What laws, decisions, or events is your president known for?";
 }
 
 // HELP
 else if(lower.includes("help")){
-  r="What part are you working on—research, thesis, or slides?";
+  r = "What part are you working on—research, thesis, or slides?";
 }
 
 // THESIS
 else if(lower.includes("thesis")){
-  r="Do you have helped/harmed, a group, and 3 arguments?";
+  r = "Do you have helped/harmed, a group, and 3 arguments?";
 }
 
 // ANALYZE RESPONSE
@@ -281,8 +270,9 @@ if(pres){
   r += " Think about how this connects to " + pres + ".";
 }
 
-chat.innerHTML += "<p><b>Coach Bot:</b> "+r+"</p>";
-msg.value="";
+chat.innerHTML += "<p><b>Coach Bot:</b> " + r + "</p>";
+
+msg.value = "";
 }
 </script>
 
