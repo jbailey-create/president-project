@@ -5,18 +5,139 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>President Project Hub</title>
 <style>
-body { font-family: 'Segoe UI', sans-serif; margin:0; background:linear-gradient(135deg,#eef2ff,#e0f2fe); }
-header { background:#1e3a8a; color:white; padding:25px; text-align:center; }
-nav { background:#111827; padding:12px; text-align:center; }
-nav a { color:white; margin:10px; text-decoration:none; font-weight:bold; }
-section { background:white; margin:20px auto; padding:20px; max-width:950px; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.1); }
-h2 { color:#1e3a8a; }
-ul { line-height:1.7; }
-button { background:#2563eb; color:white; border:none; padding:10px 15px; border-radius:8px; cursor:pointer; }
-button:hover { background:#1d4ed8; }
-.progress-bar { width:100%; background:#e5e7eb; border-radius:10px; overflow:hidden; }
-.progress-fill { height:20px; width:0%; background:#22c55e; text-align:center; color:white; font-size:12px; }
-input, select { padding:8px; margin:5px; }
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin:0;
+  background: linear-gradient(135deg, #1e3a8a, #3b82f6, #22c55e);
+  background-size: 400% 400%;
+  animation: gradientBG 12s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+header {
+  background: rgba(0,0,0,0.7);
+  color:white;
+  padding:30px;
+  text-align:center;
+  backdrop-filter: blur(6px);
+}
+
+header::after {
+  content:"";
+  display:block;
+  height:120px;
+  background:url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Flag_of_the_United_States.svg/320px-Flag_of_the_United_States.svg.png');
+  background-size:cover;
+  opacity:0.2;
+  margin-top:15px;
+}
+
+nav {
+  background:#111827;
+  padding:12px;
+  text-align:center;
+  position:sticky;
+  top:0;
+  z-index:1000;
+}
+
+nav a {
+  color:white;
+  margin:10px;
+  text-decoration:none;
+  font-weight:bold;
+  transition:0.3s;
+}
+
+nav a:hover {
+  color:#22c55e;
+}
+
+section {
+  background: rgba(255,255,255,0.95);
+  margin:25px auto;
+  padding:25px;
+  max-width:950px;
+  border-radius:20px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+  transition: transform 0.2s;
+}
+
+section:hover {
+  transform: scale(1.01);
+}
+
+h2::before {
+  content:"⭐ ";
+}
+
+ul {
+  line-height:1.8;
+}
+
+button {
+  background: linear-gradient(45deg, #2563eb, #22c55e);
+  color:white;
+  border:none;
+  padding:10px 15px;
+  border-radius:10px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover {
+  transform: scale(1.08);
+}
+
+.progress-bar {
+  width:100%;
+  background:#e5e7eb;
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.progress-fill {
+  height:20px;
+  width:0%;
+  background:#22c55e;
+  text-align:center;
+  color:white;
+  font-size:12px;
+}
+
+input, select {
+  padding:8px;
+  margin:5px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+
+.badge {
+  display:inline-block;
+  background:#22c55e;
+  color:white;
+  padding:5px 10px;
+  border-radius:20px;
+  margin:5px;
+  font-size:12px;
+}
+
+.pres-row {
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  margin-top:10px;
+}
+
+.pres-row img {
+  height:80px;
+  border-radius:10px;
+}
 </style>
 </head>
 <body>
@@ -24,6 +145,13 @@ input, select { padding:8px; margin:5px; }
 <header>
 <h1>🇺🇸 President Project Hub</h1>
 <p>Think like a historian. Build your argument.</p>
+<div class="pres-row">
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Abraham_Lincoln.jpg">
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/56/FDR_1944_Color_Portrait.jpg">
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/32/JFK_White_House_color_photo_portrait.jpg">
+<img src="https://upload.wikimedia.org/wikipedia/commons/8/8d/President_Barack_Obama.jpg">
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Theodore_Roosevelt.jpg">
+</div>
 </header>
 
 <nav>
@@ -62,6 +190,8 @@ input, select { padding:8px; margin:5px; }
 </section>
 
 <section id="checklist">
+<h3>Level Up Progress 🎮</h3>
+<div class="badge">Historian Level 1</div>
 <h2>Checklist</h2>
 <ul id="checklistItems">
 <li><input type="checkbox" onchange="updateProgress()"> Choose President</li>
