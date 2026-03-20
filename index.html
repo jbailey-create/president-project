@@ -10,7 +10,6 @@ body {
   font-family: 'Segoe UI', sans-serif;
   margin:0;
   background: linear-gradient(135deg,#1e3a8a,#3b82f6);
-  color:#111;
 }
 
 header {
@@ -25,13 +24,12 @@ header {
   background:#000;
   color:white;
   overflow:hidden;
-  white-space:nowrap;
 }
 .pres-track {
   display:inline-block;
   padding:10px;
-  animation: scroll 20s linear infinite;
-  font-size:18px;
+  animation: scroll 25s linear infinite;
+  white-space:nowrap;
 }
 @keyframes scroll {
   from { transform: translateX(100%); }
@@ -67,7 +65,6 @@ button {
   cursor:pointer;
 }
 
-/* PROGRESS */
 .progress-bar {
   background:#ddd;
   border-radius:10px;
@@ -79,6 +76,11 @@ button {
   color:white;
   text-align:center;
 }
+
+input, select {
+  padding:8px;
+  margin:5px;
+}
 </style>
 </head>
 
@@ -89,10 +91,17 @@ button {
 <p>Think like a historian. Build your argument.</p>
 </header>
 
+<!-- STUDENT PRESIDENT INPUT -->
+<div style="text-align:center; padding:10px; background:#e0f2fe;">
+  <strong>My President:</strong>
+  <input id="studentPresident" placeholder="Type your assigned president">
+</div>
+
+<!-- PRESIDENT SCROLL -->
 <div class="pres-bar">
-  <div class="pres-track">
-    🇺🇸 Lincoln 🇺🇸 FDR 🇺🇸 JFK 🇺🇸 Obama 🇺🇸 Teddy Roosevelt 🇺🇸 Civil Rights 🇺🇸 Freedom 🇺🇸 Equality 🇺🇸
-  </div>
+<div class="pres-track">
+🇺🇸 Andrew Jackson 🇺🇸 Millard Fillmore 🇺🇸 Franklin Pierce 🇺🇸 Abraham Lincoln 🇺🇸 Andrew Johnson 🇺🇸 Ulysses S. Grant 🇺🇸 Grover Cleveland 🇺🇸 William McKinley 🇺🇸 Theodore Roosevelt 🇺🇸 Woodrow Wilson 🇺🇸 Warren Harding 🇺🇸 Calvin Coolidge 🇺🇸 Herbert Hoover 🇺🇸 Franklin D. Roosevelt 🇺🇸 Harry Truman 🇺🇸 Dwight Eisenhower 🇺🇸 John F. Kennedy 🇺🇸 Lyndon B. Johnson 🇺🇸 Ronald Reagan 🇺🇸 George Bush Sr. 🇺🇸 Bill Clinton 🇺🇸 George Bush 🇺🇸 Barack Obama 🇺🇸
+</div>
 </div>
 
 <nav>
@@ -135,6 +144,7 @@ button {
 <li><input type="checkbox" onchange="prog()"> Research done</li>
 <li><input type="checkbox" onchange="prog()"> Slides created</li>
 <li><input type="checkbox" onchange="prog()"> Practice</li>
+<li><input type="checkbox" onchange="prog()"> Ready to submit</li>
 </ul>
 
 <div class="progress-bar">
@@ -188,11 +198,35 @@ function bot(){
 let m=msg.value.trim();
 if(!m) return;
 
+let pres=document.getElementById("studentPresident").value;
+
 chat.innerHTML += "<p><b>You:</b> "+m+"</p>";
 
-let r = "What group was affected? What evidence proves it?";
-if(m.length>120) r = "That looks copied. Put it in your own words.";
-if(m.toLowerCase().includes("thesis")) r = "Does your thesis include 3 arguments and a group?";
+let r="";
+
+// FINAL CHECKER
+if(m.toLowerCase().includes("check my work") || m.toLowerCase().includes("am i done")){
+  r="Before you submit, check:\n- Does your thesis clearly say helped/harmed AND include 3 arguments?\n- Did you explain what group was affected?\n- Did you include specific evidence (laws, actions)?\n- Are your slides in your own words?\n- Are you ready to present without reading?";
+}
+
+// COPY DETECTION
+else if(m.length>120){
+  r="That looks copied 🚫. Put it in your own words.";
+}
+
+// THESIS SUPPORT
+else if(m.toLowerCase().includes("thesis")){
+  r="Does your thesis include helped/harmed, a group, and 3 arguments?";
+}
+
+// GENERAL COACHING
+else{
+  r="What group was affected? What evidence proves it?";
+}
+
+if(pres){
+  r += " Think about how this connects to " + pres + ".";
+}
 
 chat.innerHTML += "<p><b>Coach Bot:</b> "+r+"</p>";
 msg.value="";
