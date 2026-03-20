@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>President Project Hub</title>
+<style>
+body { font-family: 'Segoe UI', sans-serif; margin:0; background:linear-gradient(135deg,#eef2ff,#e0f2fe); }
+header { background:#1e3a8a; color:white; padding:25px; text-align:center; }
+nav { background:#111827; padding:12px; text-align:center; }
+nav a { color:white; margin:10px; text-decoration:none; font-weight:bold; }
+section { background:white; margin:20px auto; padding:20px; max-width:950px; border-radius:15px; box-shadow:0 5px 15px rgba(0,0,0,0.1); }
+h2 { color:#1e3a8a; }
+ul { line-height:1.7; }
+button { background:#2563eb; color:white; border:none; padding:10px 15px; border-radius:8px; cursor:pointer; }
+button:hover { background:#1d4ed8; }
+.progress-bar { width:100%; background:#e5e7eb; border-radius:10px; overflow:hidden; }
+.progress-fill { height:20px; width:0%; background:#22c55e; text-align:center; color:white; font-size:12px; }
+input, select { padding:8px; margin:5px; }
+</style>
+</head>
+<body>
+
+<header>
+<h1>🇺🇸 President Project Hub</h1>
+<p>Think like a historian. Build your argument.</p>
+</header>
+
+<nav>
+<a href="#overview">Overview</a>
+<a href="#thesis">Thesis Builder</a>
+<a href="#checklist">Checklist</a>
+<a href="#timeline">Timeline</a>
+<a href="#rubric">Rubric</a>
+<a href="#chatbot">Coach Bot</a>
+</nav>
+
+<section id="overview">
+<h2>Essential Question</h2>
+<p><strong>How did your president affect people's rights and freedoms — and what does this say about their legacy?</strong></p>
+<p>Your job: Show how your president HELPED or HARMED rights using evidence.</p>
+</section>
+
+<section id="thesis">
+<h2>Thesis Generator</h2>
+<p>Build your thesis with 3 arguments (your 3 prongs!)</p>
+
+<select id="impact">
+<option value="helped">Helped</option>
+<option value="harmed">Harmed</option>
+<option value="both helped and harmed">Both Helped and Harmed</option>
+</select>
+
+<input id="group" placeholder="Which group? (ex: African Americans)">
+<input id="arg1" placeholder="Argument 1 (ex: law or action)">
+<input id="arg2" placeholder="Argument 2">
+<input id="arg3" placeholder="Argument 3">
+
+<button onclick="generateThesis()">Build Thesis</button>
+
+<p id="thesisOutput" style="margin-top:10px; font-weight:bold;"></p>
+</section>
+
+<section id="checklist">
+<h2>Checklist</h2>
+<ul id="checklistItems">
+<li><input type="checkbox" onchange="updateProgress()"> Choose President</li>
+<li><input type="checkbox" onchange="updateProgress()"> 5 Intro Notecards</li>
+<li><input type="checkbox" onchange="updateProgress()"> Thesis Statement</li>
+<li><input type="checkbox" onchange="updateProgress()"> 15 Body Notecards</li>
+<li><input type="checkbox" onchange="updateProgress()"> 5 Sources (1 book)</li>
+<li><input type="checkbox" onchange="updateProgress()"> Slides Created</li>
+<li><input type="checkbox" onchange="updateProgress()"> Evidence of Rights</li>
+<li><input type="checkbox" onchange="updateProgress()"> Practice</li>
+<li><input type="checkbox" onchange="updateProgress()"> Submit May 1</li>
+</ul>
+
+<h3>Progress Tracker</h3>
+<div class="progress-bar">
+<div class="progress-fill" id="progressFill">0%</div>
+</div>
+</section>
+
