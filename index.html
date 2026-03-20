@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>President Project Hub</title>
+
 <style>
 body { font-family: 'Segoe UI', sans-serif; margin:0; background:linear-gradient(135deg,#eef2ff,#e0f2fe); }
 header { background:#1e3a8a; color:white; padding:25px; text-align:center; }
@@ -19,6 +20,7 @@ button:hover { background:#1d4ed8; }
 input, select { padding:8px; margin:5px; }
 </style>
 </head>
+
 <body>
 
 <header>
@@ -28,10 +30,11 @@ input, select { padding:8px; margin:5px; }
 
 <nav>
 <a href="#overview">Overview</a>
-<a href="#thesis">Thesis Builder</a>
+<a href="#thesis">Thesis</a>
 <a href="#checklist">Checklist</a>
 <a href="#timeline">Timeline</a>
 <a href="#rubric">Rubric</a>
+<a href="#studentChecklist">Success</a>
 <a href="#chatbot">Coach Bot</a>
 </nav>
 
@@ -43,22 +46,19 @@ input, select { padding:8px; margin:5px; }
 
 <section id="thesis">
 <h2>Thesis Generator</h2>
-<p>Build your thesis with 3 arguments (your 3 prongs!)</p>
-
 <select id="impact">
 <option value="helped">Helped</option>
 <option value="harmed">Harmed</option>
 <option value="both helped and harmed">Both Helped and Harmed</option>
 </select>
 
-<input id="group" placeholder="Which group? (ex: African Americans)">
-<input id="arg1" placeholder="Argument 1 (ex: law or action)">
+<input id="group" placeholder="Which group?">
+<input id="arg1" placeholder="Argument 1">
 <input id="arg2" placeholder="Argument 2">
 <input id="arg3" placeholder="Argument 3">
 
-<button onclick="generateThesis()">Build Thesis</button>
-
-<p id="thesisOutput" style="margin-top:10px; font-weight:bold;"></p>
+<button type="button" onclick="generateThesis()">Build Thesis</button>
+<p id="thesisOutput"></p>
 </section>
 
 <section id="checklist">
@@ -68,11 +68,11 @@ input, select { padding:8px; margin:5px; }
 <li><input type="checkbox" onchange="updateProgress()"> 5 Intro Notecards</li>
 <li><input type="checkbox" onchange="updateProgress()"> Thesis Statement</li>
 <li><input type="checkbox" onchange="updateProgress()"> 15 Body Notecards</li>
-<li><input type="checkbox" onchange="updateProgress()"> 5 Sources (1 book)</li>
+<li><input type="checkbox" onchange="updateProgress()"> 5 Sources</li>
 <li><input type="checkbox" onchange="updateProgress()"> Slides Created</li>
-<li><input type="checkbox" onchange="updateProgress()"> Evidence of Rights</li>
+<li><input type="checkbox" onchange="updateProgress()"> Evidence Included</li>
 <li><input type="checkbox" onchange="updateProgress()"> Practice</li>
-<li><input type="checkbox" onchange="updateProgress()"> Submit May 1</li>
+<li><input type="checkbox" onchange="updateProgress()"> Submit</li>
 </ul>
 
 <h3>Progress Tracker</h3>
@@ -92,11 +92,82 @@ input, select { padding:8px; margin:5px; }
 </section>
 
 <section id="rubric">
-<h2>Presentation Rubric</h2>
-
-<h3>Content & Historical Thinking (20 pts)</h3>
+<h2>Rubric</h2>
 <ul>
-<li><strong>20:</strong> Clear, insightful explanation of how rights were helped/harmed. Strong understanding with original thinking.</li>
-<li><strong>15:</strong> Clear explanation with good understanding.</li>
-<li><strong>10:</strong> Some understanding but ideas are general or repetitive.</li>
-<li><strong>5 or below:</strong> Limited understanding. Ideas unclear or inaccurate.</li>
+<li>Content: Rights helped/harmed with evidence</li>
+<li>Organization: Clear structure</li>
+<li>Evidence: Supports thesis</li>
+<li>Visuals: Support ideas</li>
+<li>Presentation: Speak clearly</li>
+</ul>
+</section>
+
+<section id="studentChecklist">
+<h2>Student Success Checklist</h2>
+<ul>
+<li><input type="checkbox"> I answered the essential question</li>
+<li><input type="checkbox"> My thesis includes 3 arguments</li>
+<li><input type="checkbox"> I included a group affected</li>
+<li><input type="checkbox"> I used evidence</li>
+<li><input type="checkbox"> I explained impact</li>
+<li><input type="checkbox"> I used my own words</li>
+</ul>
+</section>
+
+<section id="chatbot">
+<h2>Coach Bot 🤖</h2>
+<div id="chatbox" style="height:200px; overflow:auto; border:1px solid #ccc; padding:10px;"></div>
+<input id="userInput">
+<button type="button" onclick="sendMessage()">Send</button>
+</section>
+
+<script>
+function generateThesis(){
+let impact=document.getElementById('impact').value;
+let group=document.getElementById('group').value;
+let a1=document.getElementById('arg1').value;
+let a2=document.getElementById('arg2').value;
+let a3=document.getElementById('arg3').value;
+
+let thesis=`This presentation argues that this president ${impact} the rights and freedoms of ${group} because of ${a1}, ${a2}, and ${a3}.`;
+
+document.getElementById('thesisOutput').innerText=thesis;
+}
+
+function updateProgress(){
+let checkboxes=document.querySelectorAll('#checklistItems input');
+let checked=0;
+checkboxes.forEach(cb=>{ if(cb.checked) checked++; });
+let percent=Math.round((checked/checkboxes.length)*100);
+let bar=document.getElementById('progressFill');
+bar.style.width=percent+'%';
+bar.innerText=percent+'%';
+}
+
+function sendMessage(){
+let input=document.getElementById('userInput');
+let chat=document.getElementById('chatbox');
+let msg=input.value.trim();
+if(!msg)return;
+
+chat.innerHTML+=`<p><b>You:</b> ${msg}</p>`;
+
+let res="";
+if(msg.length>150){
+res="That looks copied 🚫. Try rewriting it in your own words.";
+}
+else if(msg.toLowerCase().includes("thesis")){
+res="Does your thesis include 3 arguments and a group affected?";
+}
+else{
+res="What group was affected? What evidence proves it?";
+}
+
+chat.innerHTML+=`<p><b>Coach Bot:</b> ${res}</p>`;
+chat.scrollTop=chat.scrollHeight;
+input.value="";
+}
+</script>
+
+</body>
+</html>
