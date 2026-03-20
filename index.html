@@ -1,259 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>President Project Hub v3</title>
-
-<style>
-body {
-  font-family: 'Segoe UI', sans-serif;
-  margin:0;
-  background:
-    linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
-    url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/White_House_north_and_south_sides.jpg/1280px-White_House_north_and_south_sides.jpg');
-  background-size: cover;
-  background-attachment: fixed;
-}
-
-/* HEADER */
-header {
-  background:#111827;
-  color:white;
-  padding:20px;
-  text-align:center;
-  letter-spacing:1px;
-}
-
-/* PRESIDENT BAR */
-.pres-bar {
-  background:#000;
-  color:white;
-  overflow:hidden;
-}
-.pres-track {
-  display:inline-block;
-  padding:10px;
-  white-space:nowrap;
-  animation: scroll 35s linear infinite;
-}
-@keyframes scroll {
-  from { transform: translateX(100%); }
-  to { transform: translateX(-100%); }
-}
-
-/* NAV */
-nav {
-  background:#111827;
-  padding:10px;
-  text-align:center;
-  position:sticky;
-  top:0;
-}
-nav a {
-  color:white;
-  margin:10px;
-  text-decoration:none;
-  font-weight:bold;
-}
-
-/* BRIEFING CARDS */
-section {
-  background:#ffffff;
-  margin:25px auto;
-  padding:20px;
-  max-width:900px;
-  border-radius:8px;
-  box-shadow:0 8px 25px rgba(0,0,0,0.3);
-  border-left:6px solid #1e3a8a;
-}
-
-/* HEADER STRIP */
-.section-title {
-  border-bottom:2px solid #1e3a8a;
-  padding-bottom:5px;
-  font-weight:bold;
-}
-
-/* INPUTS */
-input, select {
-  padding:8px;
-  margin:5px;
-}
-
-/* BUTTON */
-button {
-  padding:10px;
-  background:#2563eb;
-  color:white;
-  border:none;
-  border-radius:6px;
-  cursor:pointer;
-}
-
-/* PROGRESS */
-.progress-bar {
-  background:#ddd;
-  border-radius:10px;
-}
-.progress-fill {
-  background:#22c55e;
-  height:20px;
-  width:0%;
-  color:white;
-  text-align:center;
-}
-
-/* TOP INPUT BAR */
-.student-bar {
-  text-align:center;
-  background:#e0f2fe;
-  padding:10px;
-}
-</style>
-</head>
-
-<body>
-
-<header>
-<h1>🇺🇸 PRESIDENT PROJECT BRIEFING HUB</h1>
-<p>Think like a historian. Build your argument.</p>
-</header>
-
-<div class="student-bar">
-<strong>My President:</strong>
-<input id="studentPresident" placeholder="Type your assigned president">
-</div>
-
-<div class="pres-bar">
-<div class="pres-track">
-🇺🇸 Andrew Jackson 🇺🇸 Millard Fillmore 🇺🇸 Franklin Pierce 🇺🇸 Abraham Lincoln 🇺🇸 Andrew Johnson 🇺🇸 Ulysses S. Grant 🇺🇸 Grover Cleveland 🇺🇸 William McKinley 🇺🇸 Theodore Roosevelt 🇺🇸 Woodrow Wilson 🇺🇸 Warren Harding 🇺🇸 Calvin Coolidge 🇺🇸 Herbert Hoover 🇺🇸 Franklin D. Roosevelt 🇺🇸 Harry Truman 🇺🇸 Dwight Eisenhower 🇺🇸 John F. Kennedy 🇺🇸 Lyndon B. Johnson 🇺🇸 Ronald Reagan 🇺🇸 George Bush Sr. 🇺🇸 Bill Clinton 🇺🇸 George Bush 🇺🇸 Barack Obama 🇺🇸
-</div>
-</div>
-
-<nav>
-<a href="#overview">Overview</a>
-<a href="#thesis">Thesis</a>
-<a href="#checklist">Checklist</a>
-<a href="#timeline">Timeline</a>
-<a href="#rubric">Rubric</a>
-<a href="#chatbot">Coach Bot</a>
-</nav>
-
-<section id="overview">
-<h2 class="section-title">📄 Mission Briefing</h2>
-<p><strong>Essential Question:</strong><br>
-How did your president affect people's rights and freedoms — and what does this say about their legacy?</p>
-</section>
-
-<section id="thesis">
-<h2 class="section-title">✍️ Thesis Builder</h2>
-
-<select id="impact">
-<option value="helped">Helped</option>
-<option value="harmed">Harmed</option>
-</select>
-
-<input id="group" placeholder="Group affected">
-<input id="a1" placeholder="Argument 1">
-<input id="a2" placeholder="Argument 2">
-<input id="a3" placeholder="Argument 3">
-
-<button onclick="buildThesis()">Generate Thesis</button>
-
-<p id="out"></p>
-</section>
-
-<section id="checklist">
-<h2 class="section-title">📊 Progress Checklist</h2>
-
-<ul id="list">
-<li><input type="checkbox" onchange="prog()"> Thesis complete</li>
-<li><input type="checkbox" onchange="prog()"> Research done</li>
-<li><input type="checkbox" onchange="prog()"> Slides created</li>
-<li><input type="checkbox" onchange="prog()"> Practice</li>
-<li><input type="checkbox" onchange="prog()"> Ready to submit</li>
-</ul>
-
-<div class="progress-bar">
-<div class="progress-fill" id="bar">0%</div>
-</div>
-</section>
-
-<section id="timeline">
-<h2 class="section-title">🗓 Timeline</h2>
-<ul>
-<li>April 8-9: Intro Notecards</li>
-<li>April 20: Body Notecards</li>
-<li>May 1: Project Due</li>
-<li>May 1-8: Presentations</li>
-</ul>
-</section>
-
-<section id="rubric">
-<h2 class="section-title">📋 Evaluation Rubric</h2>
-<ul>
-<li>Content & Thinking (20)</li>
-<li>Organization (20)</li>
-<li>Evidence (20)</li>
-<li>Visuals (20)</li>
-<li>Presentation (20)</li>
-</ul>
-</section>
-
-<section id="chatbot">
-<h2 class="section-title">🤖 Coach Bot</h2>
-
-<div id="chat"></div>
-
-<input id="msg" placeholder="Ask a question...">
-<button onclick="bot()">Send</button>
-</section>
-
-<script>
-function buildThesis(){
-let t=`This presentation argues that this president ${impact.value} the rights of ${group.value} because of ${a1.value}, ${a2.value}, and ${a3.value}.`;
-out.innerText=t;
-}
-
-function prog(){
-let boxes=document.querySelectorAll('#list input');
-let done=[...boxes].filter(x=>x.checked).length;
-let pct=Math.round(done/boxes.length*100);
-bar.style.width=pct+'%';
-bar.innerText=pct+'%';
-}
-
 function bot(){
 let m=msg.value.trim();
 if(!m) return;
 
 let pres=document.getElementById("studentPresident").value;
+let lower=m.toLowerCase();
 
 chat.innerHTML += "<p><b>You:</b> "+m+"</p>";
 
 let r="";
 
-// FINAL CHECKER
-if(m.toLowerCase().includes("check my work") || m.toLowerCase().includes("am i done")){
-  r="Before you submit:\n- Thesis = helped/harmed + 3 arguments?\n- Group clearly explained?\n- Evidence included (laws/actions)?\n- Slides in your own words?\n- Ready to present without reading?";
-}
-
 // COPY CHECK
-else if(m.length>120){
-  r="That looks copied 🚫. Put it in your own words.";
+if(m.length > 120){
+  r = "That looks like copied text 🚫. Explain that idea in your own words—what does it mean?";
 }
 
-// THESIS SUPPORT
-else if(m.toLowerCase().includes("thesis")){
-  r="Does your thesis include helped/harmed, a group, and 3 arguments?";
+// STUDENT ASKING WHAT TO DO
+else if(lower.includes("what do") || lower.includes("what did")){
+  r = "Start with actions. What laws, decisions, or events is your president known for?";
 }
 
-// GENERAL
-else{
-  r="What group was affected? What evidence proves it?";
+// HELP REQUEST
+else if(lower.includes("help")){
+  r = "I can help guide you. Are you working on research, your thesis, or your slides right now?";
 }
 
+// THESIS BUILDING
+else if(lower.includes("thesis")){
+  r = "Let’s build it step by step. Do you think your president helped or harmed rights? What are your 3 strongest reasons?";
+}
+
+// 🔥 ANALYZE STUDENT RESPONSE
+else {
+
+  let hasGroup = /(african|women|immigrants|people|citizens|americans|group)/i.test(m);
+  let hasEvidence = /(law|act|decision|order|war|policy|amendment)/i.test(m);
+  let hasImpact = /(affected|changed|helped|hurt|impact)/i.test(m);
+
+  if(!hasGroup){
+    r = "You’re on the right track. Which group of people was affected?";
+  }
+  else if(!hasEvidence){
+    r = "Good—now what specific law, action, or event proves that?";
+  }
+  else if(!hasImpact){
+    r = "Nice evidence. Now explain—how did that actually change people’s rights?";
+  }
+  else{
+    r = "That’s strong thinking. Can you explain it clearly in your own words like you would on your slides?";
+  }
+}
+
+// PERSONALIZE
 if(pres){
   r += " Think about how this connects to " + pres + ".";
 }
@@ -261,7 +58,3 @@ if(pres){
 chat.innerHTML += "<p><b>Coach Bot:</b> "+r+"</p>";
 msg.value="";
 }
-</script>
-
-</body>
-</html>
