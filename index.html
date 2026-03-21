@@ -17,6 +17,25 @@ padding:20px;
 text-align:center;
 }
 
+/* SCROLLING PRESIDENT BAR */
+.pres-bar{
+background:#000;
+color:white;
+overflow:hidden;
+}
+
+.pres-track{
+display:inline-block;
+white-space:nowrap;
+padding:10px;
+animation:scroll 35s linear infinite;
+}
+
+@keyframes scroll{
+from{transform:translateX(100%)}
+to{transform:translateX(-100%)}
+}
+
 nav{
 background:#000;
 padding:10px;
@@ -38,6 +57,7 @@ max-width:900px;
 border-radius:10px;
 }
 
+/* PROGRESS */
 .progress-bar{
 background:#ccc;
 height:20px;
@@ -59,6 +79,12 @@ text-align:center;
 <h1>President Project Hub</h1>
 </header>
 
+<div class="pres-bar">
+<div class="pres-track">
+🇺🇸 Andrew Jackson 🇺🇸 Millard Fillmore 🇺🇸 Franklin Pierce 🇺🇸 Abraham Lincoln 🇺🇸 Andrew Johnson 🇺🇸 Ulysses S. Grant 🇺🇸 Grover Cleveland 🇺🇸 William McKinley 🇺🇸 Theodore Roosevelt 🇺🇸 Woodrow Wilson 🇺🇸 Warren Harding 🇺🇸 Calvin Coolidge 🇺🇸 Herbert Hoover 🇺🇸 Franklin D. Roosevelt 🇺🇸 Harry Truman 🇺🇸 Dwight Eisenhower 🇺🇸 John F. Kennedy 🇺🇸 Lyndon B. Johnson 🇺🇸 Ronald Reagan 🇺🇸 George Bush Sr. 🇺🇸 Bill Clinton 🇺🇸 George Bush 🇺🇸 Barack Obama 🇺🇸
+</div>
+</div>
+
 <nav>
 <a href="#overview">Overview</a>
 <a href="#timeline">Timeline</a>
@@ -78,7 +104,7 @@ text-align:center;
 <li>April 8–9: Introduction Notecards Due</li>
 <li>April 20: Body Notecards Due</li>
 <li>May 1: Final Presentation Due</li>
-<li>May 1–8: Presentations in class</li>
+<li>May 1–8: Presentations</li>
 </ul>
 </section>
 
@@ -87,15 +113,15 @@ text-align:center;
 
 <h3>Content & Thinking (20)</h3>
 <ul>
-<li>20: Strong explanation of rights helped/harmed with detail</li>
-<li>15: Good explanation with some detail</li>
+<li>20: Strong explanation of rights helped/harmed</li>
+<li>15: Good explanation</li>
 <li>10: Basic ideas</li>
 <li>5: Limited understanding</li>
 </ul>
 
 <h3>Organization (20)</h3>
 <ul>
-<li>20: Clear thesis + 3 arguments + structure</li>
+<li>20: Clear thesis + 3 arguments</li>
 <li>15: Mostly organized</li>
 <li>10: Some organization</li>
 <li>5: Disorganized</li>
@@ -106,12 +132,12 @@ text-align:center;
 <li>20: Strong evidence supports claims</li>
 <li>15: Some evidence</li>
 <li>10: Limited evidence</li>
-<li>5: No clear evidence</li>
+<li>5: No evidence</li>
 </ul>
 
 <h3>Visuals (20)</h3>
 <ul>
-<li>20: Clear, engaging slides</li>
+<li>20: Clear engaging slides</li>
 <li>15: Mostly clear</li>
 <li>10: Too much text</li>
 <li>5: Poor slides</li>
@@ -119,14 +145,13 @@ text-align:center;
 
 <h3>Presentation (40)</h3>
 <ul>
-<li>40: Eye contact, ~5 minutes, no reading</li>
-<li>30: Some reading, mostly clear</li>
+<li>40: Eye contact, 5 minutes, no reading</li>
+<li>30: Some reading</li>
 <li>20: Frequent reading</li>
 <li>10: Unprepared</li>
 </ul>
 
 <p><strong>Total: /120</strong></p>
-
 </section>
 
 <section id="checklist">
@@ -155,7 +180,7 @@ text-align:center;
 
 <script>
 
-// SAVE
+// PROGRESS SAVE
 function save(){
 let boxes=document.querySelectorAll('#list input');
 boxes.forEach((cb,i)=>{
@@ -200,6 +225,7 @@ if(/affected|changed|helped|hurt/i.test(m))mem.i=true;
 let r="";
 
 if(m.length>120) r="Put that in your own words.";
+else if(m.length<10) r="Too vague—be specific.";
 else if(!mem.g) r="Who was affected?";
 else if(!mem.e) r="What law or action proves that?";
 else if(!mem.i) r="How did rights change?";
