@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>President Project Hub v7</title>
+<title>President Project Hub v8</title>
 
 <style>
 body {
@@ -199,42 +199,60 @@ How did your president affect people's rights and freedoms — and what does thi
 </section>
 
 <script>
+// THESIS
 function buildThesis(){
 let t=`This presentation argues that this president ${impact.value} the rights of ${group.value} because of ${a1.value}, ${a2.value}, and ${a3.value}.`;
 out.innerText=t;
 }
 
-// SAVE + LOAD CHECKLIST
+// PROGRESS SYSTEM
+window.onload = function() {
+  loadProgress();
+};
+
+function loadProgress(){
+  let boxes = document.querySelectorAll('#list input');
+  let done = 0;
+
+  boxes.forEach((cb, i) => {
+    let saved = localStorage.getItem("check_" + i);
+    if(saved === "true"){
+      cb.checked = true;
+      done++;
+    }
+  });
+
+  updateBar(done, boxes.length);
+}
+
 function prog(){
-let boxes = document.querySelectorAll('#list input');
+  let boxes = document.querySelectorAll('#list input');
+  let done = 0;
 
-boxes.forEach((cb, i) => {
-  localStorage.setItem("check_" + i, cb.checked);
-});
+  boxes.forEach((cb, i) => {
+    localStorage.setItem("check_" + i, cb.checked);
+    if(cb.checked) done++;
+  });
 
-updateProgress();
+  updateBar(done, boxes.length);
 }
 
-function updateProgress(){
-let boxes = document.querySelectorAll('#list input');
-let done = 0;
+function updateBar(done, total){
+  let pct = Math.round((done / total) * 100);
+  let bar = document.getElementById("bar");
 
-boxes.forEach((cb, i) => {
-  let saved = localStorage.getItem("check_" + i);
-  if(saved === "true"){
-    cb.checked = true;
-    done++;
-  }
-});
-
-let pct = Math.round(done / boxes.length * 100);
-bar.style.width = pct + '%';
-bar.innerText = pct + '%';
+  bar.style.width = pct + "%";
+  bar.innerText = pct + "%";
 }
 
-window.onload = updateProgress;
+// BOT MEMORY
+let memory = {
+  group: false,
+  evidence: false,
+  impact: false
+};
 
-// 🔥 STRICT TEACHER BOT
+// BOT
 function bot(){
 let m = msg.value.trim();
 if(!m) return;
@@ -244,37 +262,51 @@ let lower = m.toLowerCase();
 
 chat.innerHTML += "<p><b>You:</b> " + m + "</p>";
 
+// DETECT CONTENT
+if(/(native|african|women|immigrants|people|americans)/i.test(m)){
+  memory.group = true;
+}
+if(/(law|act|decision|order|war|policy|amendment)/i.test(m)){
+  memory.evidence = true;
+}
+if(/(affected|changed|helped|hurt|forced|removed)/i.test(m)){
+  memory.impact = true;
+}
+
 let r = "";
 
+// COPY
 if(m.length > 120){
   r = "That looks copied 🚫. Put it in your own words.";
 }
+
+// RESEARCH PROMPT
 else if(lower.includes("what did") || lower.includes("what law")){
   r = "I won’t give you the answer—but try searching: '" + pres + " major laws'. What do you find?";
 }
+
+// HELP
 else if(lower.includes("help")){
-  r = "Show me what you’ve tried first—what have you found so far?";
+  r = "Show me what you’ve tried first—what have you found?";
 }
-else if(m.length < 15){
+
+// VAGUE
+else if(m.length < 10){
   r = "That’s too vague. Be more specific.";
 }
-else {
-  let hasGroup = /(people|group|americans|women|african|immigrants)/i.test(m);
-  let hasEvidence = /(law|act|order|decision|war|policy|amendment)/i.test(m);
-  let hasImpact = /(affected|changed|helped|hurt)/i.test(m);
 
-  if(!hasGroup){
-    r="You didn’t name a group. Who was affected?";
-  }
-  else if(!hasEvidence){
-    r="You need evidence. What law or action proves that?";
-  }
-  else if(!hasImpact){
-    r="Explain the impact—how did rights change?";
-  }
-  else{
-    r="Good—now tighten that into your own words.";
-  }
+// SMART FEEDBACK
+else if(!memory.group){
+  r = "Who was affected?";
+}
+else if(!memory.evidence){
+  r = "What specific law or action proves that?";
+}
+else if(!memory.impact){
+  r = "How did that change people’s rights?";
+}
+else{
+  r = "That’s a strong argument—make sure it’s clear and in your own words.";
 }
 
 if(pres){
