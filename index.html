@@ -17,18 +17,26 @@ padding:20px;
 text-align:center;
 }
 
-/* SCROLLING PRESIDENT BAR */
+/* STUDENT INPUT */
+.student-bar{
+background:#e0f2fe;
+color:black;
+text-align:center;
+padding:10px;
+}
+
+/* TICKER */
 .pres-bar{
 background:#000;
-color:white;
 overflow:hidden;
 }
 
 .pres-track{
-display:inline-block;
 white-space:nowrap;
+display:inline-block;
 padding:10px;
 animation:scroll 35s linear infinite;
+color:white;
 }
 
 @keyframes scroll{
@@ -79,6 +87,13 @@ text-align:center;
 <h1>President Project Hub</h1>
 </header>
 
+<!-- STUDENT PRESIDENT INPUT -->
+<div class="student-bar">
+<strong>My President:</strong>
+<input id="studentPresident" placeholder="Type your assigned president">
+</div>
+
+<!-- SCROLLING PRESIDENT TICKER -->
 <div class="pres-bar">
 <div class="pres-track">
 🇺🇸 Andrew Jackson 🇺🇸 Millard Fillmore 🇺🇸 Franklin Pierce 🇺🇸 Abraham Lincoln 🇺🇸 Andrew Johnson 🇺🇸 Ulysses S. Grant 🇺🇸 Grover Cleveland 🇺🇸 William McKinley 🇺🇸 Theodore Roosevelt 🇺🇸 Woodrow Wilson 🇺🇸 Warren Harding 🇺🇸 Calvin Coolidge 🇺🇸 Herbert Hoover 🇺🇸 Franklin D. Roosevelt 🇺🇸 Harry Truman 🇺🇸 Dwight Eisenhower 🇺🇸 John F. Kennedy 🇺🇸 Lyndon B. Johnson 🇺🇸 Ronald Reagan 🇺🇸 George Bush Sr. 🇺🇸 Bill Clinton 🇺🇸 George Bush 🇺🇸 Barack Obama 🇺🇸
@@ -111,36 +126,12 @@ text-align:center;
 <section id="rubric">
 <h2>Rubric</h2>
 
-<h3>Content & Thinking (20)</h3>
+<h3>Content (20)</h3>
 <ul>
-<li>20: Strong explanation of rights helped/harmed</li>
-<li>15: Good explanation</li>
-<li>10: Basic ideas</li>
-<li>5: Limited understanding</li>
-</ul>
-
-<h3>Organization (20)</h3>
-<ul>
-<li>20: Clear thesis + 3 arguments</li>
-<li>15: Mostly organized</li>
-<li>10: Some organization</li>
-<li>5: Disorganized</li>
-</ul>
-
-<h3>Evidence (20)</h3>
-<ul>
-<li>20: Strong evidence supports claims</li>
-<li>15: Some evidence</li>
-<li>10: Limited evidence</li>
-<li>5: No evidence</li>
-</ul>
-
-<h3>Visuals (20)</h3>
-<ul>
-<li>20: Clear engaging slides</li>
-<li>15: Mostly clear</li>
-<li>10: Too much text</li>
-<li>5: Poor slides</li>
+<li>20: Strong explanation</li>
+<li>15: Good</li>
+<li>10: Basic</li>
+<li>5: Limited</li>
 </ul>
 
 <h3>Presentation (40)</h3>
@@ -151,7 +142,6 @@ text-align:center;
 <li>10: Unprepared</li>
 </ul>
 
-<p><strong>Total: /120</strong></p>
 </section>
 
 <section id="checklist">
@@ -189,7 +179,6 @@ localStorage.setItem("box"+i,cb.checked);
 load();
 }
 
-// LOAD
 function load(){
 let boxes=document.querySelectorAll('#list input');
 let done=0;
@@ -216,6 +205,8 @@ function bot(){
 let m=msg.value;
 if(!m)return;
 
+let pres=document.getElementById("studentPresident").value;
+
 chat.innerHTML+="<p>You: "+m+"</p>";
 
 if(/people|group|americans/i.test(m))mem.g=true;
@@ -230,6 +221,8 @@ else if(!mem.g) r="Who was affected?";
 else if(!mem.e) r="What law or action proves that?";
 else if(!mem.i) r="How did rights change?";
 else r="Good—explain it clearly.";
+
+if(pres) r+=" Focus on "+pres;
 
 chat.innerHTML+="<p>Bot: "+r+"</p>";
 msg.value="";
