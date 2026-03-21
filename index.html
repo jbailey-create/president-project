@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>President Project Hub v6</title>
+<title>President Project Hub v7</title>
 
 <style>
 body {
@@ -23,7 +23,6 @@ header {
   text-align:center;
 }
 
-/* PRESIDENT BAR */
 .pres-bar {
   background:#000;
   color:white;
@@ -40,7 +39,6 @@ header {
   to { transform: translateX(-100%); }
 }
 
-/* NAV */
 nav {
   background:#111827;
   padding:10px;
@@ -55,7 +53,6 @@ nav a {
   font-weight:bold;
 }
 
-/* CARDS */
 section {
   background:#ffffff;
   margin:25px auto;
@@ -207,14 +204,37 @@ let t=`This presentation argues that this president ${impact.value} the rights o
 out.innerText=t;
 }
 
+// SAVE + LOAD CHECKLIST
 function prog(){
-let boxes=document.querySelectorAll('#list input');
-let done=[...boxes].filter(x=>x.checked).length;
-let pct=Math.round(done/boxes.length*100);
-bar.style.width=pct+'%';
-bar.innerText=pct+'%';
+let boxes = document.querySelectorAll('#list input');
+
+boxes.forEach((cb, i) => {
+  localStorage.setItem("check_" + i, cb.checked);
+});
+
+updateProgress();
 }
 
+function updateProgress(){
+let boxes = document.querySelectorAll('#list input');
+let done = 0;
+
+boxes.forEach((cb, i) => {
+  let saved = localStorage.getItem("check_" + i);
+  if(saved === "true"){
+    cb.checked = true;
+    done++;
+  }
+});
+
+let pct = Math.round(done / boxes.length * 100);
+bar.style.width = pct + '%';
+bar.innerText = pct + '%';
+}
+
+window.onload = updateProgress;
+
+// 🔥 STRICT TEACHER BOT
 function bot(){
 let m = msg.value.trim();
 if(!m) return;
@@ -226,52 +246,42 @@ chat.innerHTML += "<p><b>You:</b> " + m + "</p>";
 
 let r = "";
 
-// COPY CHECK
 if(m.length > 120){
-  r = "That looks like copied text 🚫. Explain that idea in your own words—what does it mean?";
+  r = "That looks copied 🚫. Put it in your own words.";
 }
-
-// WHAT DID THEY DO
-else if(lower.includes("what did")){
-  r = "Start with actions. What laws, decisions, or events is your president known for?";
+else if(lower.includes("what did") || lower.includes("what law")){
+  r = "I won’t give you the answer—but try searching: '" + pres + " major laws'. What do you find?";
 }
-
-// HELP
 else if(lower.includes("help")){
-  r = "What part are you working on—research, thesis, or slides?";
+  r = "Show me what you’ve tried first—what have you found so far?";
 }
-
-// THESIS
-else if(lower.includes("thesis")){
-  r = "Do you have helped/harmed, a group, and 3 arguments?";
+else if(m.length < 15){
+  r = "That’s too vague. Be more specific.";
 }
-
-// ANALYZE RESPONSE
 else {
   let hasGroup = /(people|group|americans|women|african|immigrants)/i.test(m);
   let hasEvidence = /(law|act|order|decision|war|policy|amendment)/i.test(m);
   let hasImpact = /(affected|changed|helped|hurt)/i.test(m);
 
   if(!hasGroup){
-    r="Which group was affected?";
+    r="You didn’t name a group. Who was affected?";
   }
   else if(!hasEvidence){
-    r="What specific evidence proves that?";
+    r="You need evidence. What law or action proves that?";
   }
   else if(!hasImpact){
-    r="How did that change people’s rights?";
+    r="Explain the impact—how did rights change?";
   }
   else{
-    r="That’s strong—can you explain it clearly in your own words?";
+    r="Good—now tighten that into your own words.";
   }
 }
 
 if(pres){
-  r += " Think about how this connects to " + pres + ".";
+  r += " Stay focused on " + pres + ".";
 }
 
 chat.innerHTML += "<p><b>Coach Bot:</b> " + r + "</p>";
-
 msg.value = "";
 }
 </script>
