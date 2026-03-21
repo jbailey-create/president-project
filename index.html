@@ -77,6 +77,12 @@ width:0%;
 color:white;
 text-align:center;
 }
+
+/* RUBRIC COLORS */
+.excellent{background:#d1fae5;padding:8px;border-radius:6px;}
+.good{background:#dbeafe;padding:8px;border-radius:6px;}
+.developing{background:#fef9c3;padding:8px;border-radius:6px;}
+.beginning{background:#fee2e2;padding:8px;border-radius:6px;}
 </style>
 
 </head>
@@ -87,13 +93,11 @@ text-align:center;
 <h1>President Project Hub</h1>
 </header>
 
-<!-- STUDENT PRESIDENT INPUT -->
 <div class="student-bar">
 <strong>My President:</strong>
 <input id="studentPresident" placeholder="Type your assigned president">
 </div>
 
-<!-- SCROLLING PRESIDENT TICKER -->
 <div class="pres-bar">
 <div class="pres-track">
 🇺🇸 Andrew Jackson 🇺🇸 Millard Fillmore 🇺🇸 Franklin Pierce 🇺🇸 Abraham Lincoln 🇺🇸 Andrew Johnson 🇺🇸 Ulysses S. Grant 🇺🇸 Grover Cleveland 🇺🇸 William McKinley 🇺🇸 Theodore Roosevelt 🇺🇸 Woodrow Wilson 🇺🇸 Warren Harding 🇺🇸 Calvin Coolidge 🇺🇸 Herbert Hoover 🇺🇸 Franklin D. Roosevelt 🇺🇸 Harry Truman 🇺🇸 Dwight Eisenhower 🇺🇸 John F. Kennedy 🇺🇸 Lyndon B. Johnson 🇺🇸 Ronald Reagan 🇺🇸 George Bush Sr. 🇺🇸 Bill Clinton 🇺🇸 George Bush 🇺🇸 Barack Obama 🇺🇸
@@ -126,22 +130,37 @@ text-align:center;
 <section id="rubric">
 <h2>Rubric</h2>
 
-<h3>Content (20)</h3>
-<ul>
-<li>20: Strong explanation</li>
-<li>15: Good</li>
-<li>10: Basic</li>
-<li>5: Limited</li>
-</ul>
+<h3>Content & Thinking (20)</h3>
+<div class="excellent">20: Strong explanation with detail and insight</div>
+<div class="good">15: Good explanation</div>
+<div class="developing">10: Basic ideas</div>
+<div class="beginning">5: Limited understanding</div>
+
+<h3>Organization (20)</h3>
+<div class="excellent">20: Clear thesis + 3 arguments</div>
+<div class="good">15: Mostly organized</div>
+<div class="developing">10: Some organization</div>
+<div class="beginning">5: Disorganized</div>
+
+<h3>Evidence (20)</h3>
+<div class="excellent">20: Strong evidence supports claims</div>
+<div class="good">15: Some evidence</div>
+<div class="developing">10: Limited evidence</div>
+<div class="beginning">5: No evidence</div>
+
+<h3>Visuals (20)</h3>
+<div class="excellent">20: Clear engaging slides</div>
+<div class="good">15: Mostly clear</div>
+<div class="developing">10: Too much text</div>
+<div class="beginning">5: Poor slides</div>
 
 <h3>Presentation (40)</h3>
-<ul>
-<li>40: Eye contact, 5 minutes, no reading</li>
-<li>30: Some reading</li>
-<li>20: Frequent reading</li>
-<li>10: Unprepared</li>
-</ul>
+<div class="excellent">40: Eye contact, 5 minutes, no reading</div>
+<div class="good">30: Some reading</div>
+<div class="developing">20: Frequent reading</div>
+<div class="beginning">10: Unprepared</div>
 
+<p><strong>Total: /120</strong></p>
 </section>
 
 <section id="checklist">
@@ -169,8 +188,7 @@ text-align:center;
 </section>
 
 <script>
-
-// PROGRESS SAVE
+// PROGRESS
 function save(){
 let boxes=document.querySelectorAll('#list input');
 boxes.forEach((cb,i)=>{
@@ -182,52 +200,45 @@ load();
 function load(){
 let boxes=document.querySelectorAll('#list input');
 let done=0;
-
 boxes.forEach((cb,i)=>{
 let saved=localStorage.getItem("box"+i);
-if(saved==="true"){
-cb.checked=true;
-done++;
-}
+if(saved==="true"){cb.checked=true;done++;}
 });
-
 let pct=Math.round(done/boxes.length*100);
 bar.style.width=pct+"%";
 bar.innerText=pct+"%";
 }
-
 window.onload=load;
 
-// BOT MEMORY
+// BOT
 let mem={g:false,e:false,i:false};
 
 function bot(){
 let m=msg.value;
 if(!m)return;
 
-let pres=document.getElementById("studentPresident").value;
+let pres=studentPresident.value;
 
 chat.innerHTML+="<p>You: "+m+"</p>";
 
-if(/people|group|americans/i.test(m))mem.g=true;
-if(/law|act|war|policy/i.test(m))mem.e=true;
-if(/affected|changed|helped|hurt/i.test(m))mem.i=true;
+if(/people|group/i.test(m))mem.g=true;
+if(/law|act/i.test(m))mem.e=true;
+if(/affected|changed/i.test(m))mem.i=true;
 
 let r="";
 
 if(m.length>120) r="Put that in your own words.";
-else if(m.length<10) r="Too vague—be specific.";
+else if(m.length<10) r="Be more specific.";
 else if(!mem.g) r="Who was affected?";
-else if(!mem.e) r="What law or action proves that?";
+else if(!mem.e) r="What law proves that?";
 else if(!mem.i) r="How did rights change?";
-else r="Good—explain it clearly.";
+else r="Good—explain clearly.";
 
 if(pres) r+=" Focus on "+pres;
 
 chat.innerHTML+="<p>Bot: "+r+"</p>";
 msg.value="";
 }
-
 </script>
 
 </body>
