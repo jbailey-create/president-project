@@ -3,126 +3,103 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>President Project Hub v8</title>
-
+<title>President Project Hub</title>
 <style>
 body {
   font-family: 'Segoe UI', sans-serif;
   margin:0;
-  background:
-    linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
-    url('https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/White_House_north_and_south_sides.jpg/1280px-White_House_north_and_south_sides.jpg');
+  background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+              url('https://images.unsplash.com/photo-1601924638867-3ec2c6b4c0a5');
   background-size: cover;
+  background-position: center;
   background-attachment: fixed;
 }
 
-header {
-  background:#111827;
-  color:white;
-  padding:20px;
-  text-align:center;
-}
-
-.pres-bar {
-  background:#000;
-  color:white;
-  overflow:hidden;
-}
-.pres-track {
-  display:inline-block;
-  padding:10px;
-  white-space:nowrap;
-  animation: scroll 35s linear infinite;
-}
-@keyframes scroll {
-  from { transform: translateX(100%); }
-  to { transform: translateX(-100%); }
-}
-
-nav {
-  background:#111827;
-  padding:10px;
-  text-align:center;
-  position:sticky;
+/* subtle animated overlay */
+body::after {
+  content: "";
+  position: fixed;
   top:0;
-}
-nav a {
-  color:white;
-  margin:10px;
-  text-decoration:none;
-  font-weight:bold;
-}
-
-section {
-  background:#ffffff;
-  margin:25px auto;
-  padding:20px;
-  max-width:900px;
-  border-radius:8px;
-  box-shadow:0 8px 25px rgba(0,0,0,0.3);
-  border-left:6px solid #1e3a8a;
+  left:0;
+  width:100%;
+  height:100%;
+  background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.05), transparent 40%),
+              radial-gradient(circle at 80% 70%, rgba(255,255,255,0.05), transparent 40%);
+  pointer-events:none;
 }
 
-.section-title {
-  border-bottom:2px solid #1e3a8a;
-  padding-bottom:5px;
+header { background: rgba(0,0,0,0.7); color:white; padding:25px; text-align:center; backdrop-filter: blur(6px); }
+
+/* AWESOME PRESIDENT BAR */
+.pres-bar { overflow:hidden; background:rgba(0,0,0,0.7); padding:10px 0; }
+.pres-track { display:flex; gap:20px; width:max-content; animation: scroll 25s linear infinite; }
+.pres-bar:hover .pres-track { animation-play-state: paused; }
+
+.pres-item { position:relative; }
+.pres-item img { height:90px; border-radius:12px; transition: transform 0.3s; }
+.pres-item:hover img { transform: scale(1.15); }
+
+.pres-item span {
+  position:absolute; bottom:-25px; left:50%; transform:translateX(-50%);
+  background:black; color:white; padding:3px 8px; border-radius:6px;
+  font-size:12px; opacity:0; transition:0.3s;
+}
+.pres-item:hover span { opacity:1; bottom:-5px; }
+
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
-input, select {
-  padding:8px;
-  margin:5px;
-}
-
-button {
-  padding:10px;
-  background:#2563eb;
-  color:white;
-  border:none;
-  border-radius:6px;
-  cursor:pointer;
-}
-
-.progress-bar {
-  background:#ddd;
-  border-radius:10px;
-}
-.progress-fill {
-  background:#22c55e;
-  height:20px;
-  width:0%;
-  color:white;
-  text-align:center;
-}
-
-.student-bar {
-  text-align:center;
-  background:#e0f2fe;
-  padding:10px;
-}
+nav { background:#111827; padding:12px; text-align:center; position:sticky; top:0; }
+nav a { color:white; margin:10px; text-decoration:none; font-weight:bold; }
+section { background: rgba(255,255,255,0.95); margin:25px auto; padding:25px; max-width:950px; border-radius:20px; }
+h2 { color:#1e3a8a; }
+button { background:#2563eb; color:white; border:none; padding:10px; border-radius:8px; }
+.progress-bar { width:100%; background:#e5e7eb; border-radius:10px; }
+.progress-fill { height:20px; width:0%; background:#22c55e; text-align:center; color:white; }
 </style>
 </head>
-
 <body>
 
+<div class="bg-presidents">
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Abraham_Lincoln.jpg">
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/56/FDR_1944_Color_Portrait.jpg">
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/32/JFK_White_House_color_photo_portrait.jpg">
+<img src="https://upload.wikimedia.org/wikipedia/commons/8/8d/President_Barack_Obama.jpg">
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Theodore_Roosevelt.jpg">
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Abraham_Lincoln.jpg">
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/56/FDR_1944_Color_Portrait.jpg">
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/32/JFK_White_House_color_photo_portrait.jpg">
+<img src="https://upload.wikimedia.org/wikipedia/commons/8/8d/President_Barack_Obama.jpg">
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Theodore_Roosevelt.jpg">
+</div>
+
 <header>
-<h1>🇺🇸 PRESIDENT PROJECT BRIEFING HUB</h1>
+<h1>🇺🇸 President Project Hub</h1>
 <p>Think like a historian. Build your argument.</p>
 </header>
 
-<div class="student-bar">
-<strong>My President:</strong>
-<input id="studentPresident" placeholder="Type your assigned president">
-</div>
-
 <div class="pres-bar">
-<div class="pres-track">
-🇺🇸 Andrew Jackson 🇺🇸 Millard Fillmore 🇺🇸 Franklin Pierce 🇺🇸 Abraham Lincoln 🇺🇸 Andrew Johnson 🇺🇸 Ulysses S. Grant 🇺🇸 Grover Cleveland 🇺🇸 William McKinley 🇺🇸 Theodore Roosevelt 🇺🇸 Woodrow Wilson 🇺🇸 Warren Harding 🇺🇸 Calvin Coolidge 🇺🇸 Herbert Hoover 🇺🇸 Franklin D. Roosevelt 🇺🇸 Harry Truman 🇺🇸 Dwight Eisenhower 🇺🇸 John F. Kennedy 🇺🇸 Lyndon B. Johnson 🇺🇸 Ronald Reagan 🇺🇸 George Bush Sr. 🇺🇸 Bill Clinton 🇺🇸 George Bush 🇺🇸 Barack Obama 🇺🇸
-</div>
+  <div class="pres-track">
+    <div class="pres-item"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Abraham_Lincoln.jpg"><span>Lincoln</span></div>
+    <div class="pres-item"><img src="https://upload.wikimedia.org/wikipedia/commons/5/56/FDR_1944_Color_Portrait.jpg"><span>FDR</span></div>
+    <div class="pres-item"><img src="https://upload.wikimedia.org/wikipedia/commons/3/32/JFK_White_House_color_photo_portrait.jpg"><span>JFK</span></div>
+    <div class="pres-item"><img src="https://upload.wikimedia.org/wikipedia/commons/8/8d/President_Barack_Obama.jpg"><span>Obama</span></div>
+    <div class="pres-item"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Theodore_Roosevelt.jpg"><span>T. Roosevelt</span></div>
+
+    <!-- duplicate for smooth loop -->
+    <div class="pres-item"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Abraham_Lincoln.jpg"><span>Lincoln</span></div>
+    <div class="pres-item"><img src="https://upload.wikimedia.org/wikipedia/commons/5/56/FDR_1944_Color_Portrait.jpg"><span>FDR</span></div>
+    <div class="pres-item"><img src="https://upload.wikimedia.org/wikipedia/commons/3/32/JFK_White_House_color_photo_portrait.jpg"><span>JFK</span></div>
+    <div class="pres-item"><img src="https://upload.wikimedia.org/wikipedia/commons/8/8d/President_Barack_Obama.jpg"><span>Obama</span></div>
+    <div class="pres-item"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Theodore_Roosevelt.jpg"><span>T. Roosevelt</span></div>
+  </div>
 </div>
 
 <nav>
 <a href="#overview">Overview</a>
-<a href="#thesis">Thesis</a>
+<a href="#thesis">Thesis Builder</a>
 <a href="#checklist">Checklist</a>
 <a href="#timeline">Timeline</a>
 <a href="#rubric">Rubric</a>
@@ -130,46 +107,54 @@ button {
 </nav>
 
 <section id="overview">
-<h2 class="section-title">📄 Mission Briefing</h2>
-<p><strong>Essential Question:</strong><br>
-How did your president affect people's rights and freedoms — and what does this say about their legacy?</p>
+<h2>Essential Question</h2>
+<p><strong>How did your president affect people's rights and freedoms — and what does this say about their legacy?</strong></p>
+<p>Your job: Show how your president HELPED or HARMED rights using evidence.</p>
 </section>
 
 <section id="thesis">
-<h2 class="section-title">✍️ Thesis Builder</h2>
+<h2>Thesis Generator</h2>
+<p>Build your thesis with 3 arguments (your 3 prongs!)</p>
 
 <select id="impact">
 <option value="helped">Helped</option>
 <option value="harmed">Harmed</option>
 </select>
 
-<input id="group" placeholder="Group affected">
-<input id="a1" placeholder="Argument 1">
-<input id="a2" placeholder="Argument 2">
-<input id="a3" placeholder="Argument 3">
+<input id="group" placeholder="Which group? (ex: African Americans)">
+<input id="arg1" placeholder="Argument 1 (ex: law or action)">
+<input id="arg2" placeholder="Argument 2">
+<input id="arg3" placeholder="Argument 3">
 
-<button onclick="buildThesis()">Generate Thesis</button>
-<p id="out"></p>
+<button onclick="generateThesis()">Build Thesis</button>
+
+<p id="thesisOutput" style="margin-top:10px; font-weight:bold;"></p>
 </section>
 
 <section id="checklist">
-<h2 class="section-title">📊 Progress Checklist</h2>
-
-<ul id="list">
-<li><input type="checkbox" onchange="prog()"> Thesis complete</li>
-<li><input type="checkbox" onchange="prog()"> Research done</li>
-<li><input type="checkbox" onchange="prog()"> Slides created</li>
-<li><input type="checkbox" onchange="prog()"> Practice</li>
-<li><input type="checkbox" onchange="prog()"> Ready to submit</li>
+<h3>Level Up Progress 🎮</h3>
+<div class="badge">Historian Level 1</div>
+<h2>Checklist</h2>
+<ul id="checklistItems">
+<li><input type="checkbox" onchange="updateProgress()"> Choose President</li>
+<li><input type="checkbox" onchange="updateProgress()"> 5 Intro Notecards</li>
+<li><input type="checkbox" onchange="updateProgress()"> Thesis Statement</li>
+<li><input type="checkbox" onchange="updateProgress()"> 15 Body Notecards</li>
+<li><input type="checkbox" onchange="updateProgress()"> 5 Sources (1 book)</li>
+<li><input type="checkbox" onchange="updateProgress()"> Slides Created</li>
+<li><input type="checkbox" onchange="updateProgress()"> Evidence of Rights</li>
+<li><input type="checkbox" onchange="updateProgress()"> Practice</li>
+<li><input type="checkbox" onchange="updateProgress()"> Submit May 1</li>
 </ul>
 
+<h3>Progress Tracker</h3>
 <div class="progress-bar">
-<div class="progress-fill" id="bar">0%</div>
+<div class="progress-fill" id="progressFill">0%</div>
 </div>
 </section>
 
 <section id="timeline">
-<h2 class="section-title">🗓 Timeline</h2>
+<h2>Timeline</h2>
 <ul>
 <li>April 8-9: Intro Notecards</li>
 <li>April 20: Body Notecards</li>
@@ -180,141 +165,145 @@ How did your president affect people's rights and freedoms — and what does thi
 
 <section id="rubric">
 <h2 class="section-title">📋 Evaluation Rubric</h2>
+
+<h3>Content & Historical Thinking (20 pts)</h3>
 <ul>
-<li>Content & Thinking (20)</li>
-<li>Organization (20)</li>
-<li>Evidence (20)</li>
-<li>Visuals (20)</li>
-<li>Presentation (20)</li>
+<li><strong>20:</strong> Clearly explains how rights were helped or harmed with strong insight and specific details.</li>
+<li><strong>15:</strong> Explains impact on rights with some detail and understanding.</li>
+<li><strong>10:</strong> Basic explanation, lacks detail or clarity.</li>
+<li><strong>5 or below:</strong> Limited or unclear understanding.</li>
+</ul>
+
+<h3>Organization (20 pts)</h3>
+<ul>
+<li><strong>20:</strong> Clear intro, thesis with 3 prongs, organized body, strong conclusion.</li>
+<li><strong>15:</strong> Mostly organized, minor issues.</li>
+<li><strong>10:</strong> Some organization, hard to follow.</li>
+<li><strong>5 or below:</strong> Disorganized.</li>
+</ul>
+
+<h3>Evidence (20 pts)</h3>
+<ul>
+<li><strong>20:</strong> Strong, accurate evidence (laws, actions, events) clearly supports argument.</li>
+<li><strong>15:</strong> Some good evidence, generally supports ideas.</li>
+<li><strong>10:</strong> Limited or unclear evidence.</li>
+<li><strong>5 or below:</strong> Little to no evidence.</li>
+</ul>
+
+<h3>Visuals (20 pts)</h3>
+<ul>
+<li><strong>20:</strong> Slides are clear, engaging, and support ideas (not text-heavy).</li>
+<li><strong>15:</strong> Mostly clear and organized slides.</li>
+<li><strong>10:</strong> Basic slides, too much text.</li>
+<li><strong>5 or below:</strong> Slides unclear or distracting.</li>
+</ul>
+
+<h3>Presentation Skills (40 pts)</h3>
+<ul>
+<li><strong>40:</strong> Speaks clearly, maintains strong eye contact, presents for full time (around 5 minutes), and does NOT read from notecards or slides.</li>
+<li><strong>30:</strong> Mostly clear speaking, some eye contact, minor reliance on notes, close to time requirement.</li>
+<li><strong>20:</strong> Frequent reading from notes/slides, limited eye contact, presentation is too short or rushed.</li>
+<li><strong>10 or below:</strong> Mostly read directly from notes/slides, little eye contact, unclear or unprepared.</li>
+</ul>
+
+<p><strong>Total: /120</strong></p>
+</section>
+
+<section id="studentChecklist">
+<h2>Student Success Checklist ✅</h2>
+<ul>
+<li><input type="checkbox"> I clearly answered the essential question</li>
+<li><input type="checkbox"> My thesis states if my president helped, harmed, or both</li>
+<li><input type="checkbox"> My thesis includes 3 clear arguments (prongs)</li>
+<li><input type="checkbox"> I focused on a specific group (or groups) of people</li>
+<li><input type="checkbox"> I included strong evidence (laws, actions, events)</li>
+<li><input type="checkbox"> I explained HOW rights were affected</li>
+<li><input type="checkbox"> I considered different perspectives (not just one side)</li>
+<li><input type="checkbox"> My slides are clear and not full of text</li>
+<li><input type="checkbox"> I used my own words (no copying!)</li>
+<li><input type="checkbox"> I practiced speaking without reading</li>
 </ul>
 </section>
 
 <section id="chatbot">
-<h2 class="section-title">🤖 Coach Bot</h2>
-
-<div id="chat"></div>
-
-<input id="msg" placeholder="Ask a question...">
-<button onclick="bot()">Send</button>
+<h2>Coach Bot 🤖</h2>
+<p>This bot helps you THINK. No copying!</p>
+<div id="chatbox" style="height:250px; overflow:auto; border:1px solid #ccc; padding:10px;"></div>
+<input id="userInput" style="width:70%; padding:10px;">
+<button type="button" onclick="sendMessage()">Send</button>
 </section>
 
 <script>
-// THESIS
-function buildThesis(){
-let t=`This presentation argues that this president ${impact.value} the rights of ${group.value} because of ${a1.value}, ${a2.value}, and ${a3.value}.`;
-out.innerText=t;
+function generateThesis(){
+let impact=document.getElementById('impact').value;
+let group=document.getElementById('group').value;
+let a1=document.getElementById('arg1').value;
+let a2=document.getElementById('arg2').value;
+let a3=document.getElementById('arg3').value;
+
+let thesis=`This presentation argues that this president ${impact} the rights and freedoms of ${group} because of ${a1}, ${a2}, and ${a3}, which shaped their overall legacy.`;
+
+document.getElementById('thesisOutput').innerText=thesis;
+} the rights and freedoms of ${group} through ${action}, which shaped their overall legacy.`;
+document.getElementById('thesisOutput').innerText=thesis;
 }
 
-// PROGRESS SYSTEM
-window.onload = function() {
-  loadProgress();
-};
-
-function loadProgress(){
-  let boxes = document.querySelectorAll('#list input');
-  let done = 0;
-
-  boxes.forEach((cb, i) => {
-    let saved = localStorage.getItem("check_" + i);
-    if(saved === "true"){
-      cb.checked = true;
-      done++;
-    }
-  });
-
-  updateBar(done, boxes.length);
+function updateProgress(){
+let checkboxes=document.querySelectorAll('#checklistItems input');
+let checked=0;
+checkboxes.forEach(cb=>{ if(cb.checked) checked++; });
+let percent=Math.round((checked/checkboxes.length)*100);
+let bar=document.getElementById('progressFill');
+bar.style.width=percent+'%';
+bar.innerText=percent+'%';
 }
 
-function prog(){
-  let boxes = document.querySelectorAll('#list input');
-  let done = 0;
+function sendMessage(){
+let input=document.getElementById('userInput');
+let chat=document.getElementById('chatbox');
+let msg=input.value.trim();
 
-  boxes.forEach((cb, i) => {
-    localStorage.setItem("check_" + i, cb.checked);
-    if(cb.checked) done++;
-  });
-
-  updateBar(done, boxes.length);
+if(!msg){
+alert("Type a question first!");
+return;
 }
 
-function updateBar(done, total){
-  let pct = Math.round((done / total) * 100);
-  let bar = document.getElementById("bar");
+chat.innerHTML += "<p><b>You:</b> " + msg + "</p>";
 
-  bar.style.width = pct + "%";
-  bar.innerText = pct + "%";
+let res="";
+
+if(msg.length>150){
+res="That looks copied 🚫. Try rewriting it in your own words.";
 }
-
-// BOT MEMORY
-let memory = {
-  group: false,
-  evidence: false,
-  impact: false
-};
-
-// BOT
-function bot(){
-let m = msg.value.trim();
-if(!m) return;
-
-let pres = document.getElementById("studentPresident").value;
-let lower = m.toLowerCase();
-
-chat.innerHTML += "<p><b>You:</b> " + m + "</p>";
-
-// DETECT CONTENT
-if(/(native|african|women|immigrants|people|americans)/i.test(m)){
-  memory.group = true;
+else if(msg.toLowerCase().includes("thesis")){
+res="Does your thesis include 3 arguments and a group affected?";
 }
-if(/(law|act|decision|order|war|policy|amendment)/i.test(m)){
-  memory.evidence = true;
-}
-if(/(affected|changed|helped|hurt|forced|removed)/i.test(m)){
-  memory.impact = true;
-}
-
-let r = "";
-
-// COPY
-if(m.length > 120){
-  r = "That looks copied 🚫. Put it in your own words.";
-}
-
-// RESEARCH PROMPT
-else if(lower.includes("what did") || lower.includes("what law")){
-  r = "I won’t give you the answer—but try searching: '" + pres + " major laws'. What do you find?";
-}
-
-// HELP
-else if(lower.includes("help")){
-  r = "Show me what you’ve tried first—what have you found?";
-}
-
-// VAGUE
-else if(m.length < 10){
-  r = "That’s too vague. Be more specific.";
-}
-
-// SMART FEEDBACK
-else if(!memory.group){
-  r = "Who was affected?";
-}
-else if(!memory.evidence){
-  r = "What specific law or action proves that?";
-}
-else if(!memory.impact){
-  r = "How did that change people’s rights?";
+else if(msg.toLowerCase().includes("done")){
+res="Nice work—but who might disagree with your claim?";
 }
 else{
-  r = "That’s a strong argument—make sure it’s clear and in your own words.";
+res="What group was affected? What evidence proves it?";
 }
 
-if(pres){
-  r += " Stay focused on " + pres + ".";
+chat.innerHTML += "<p><b>Coach Bot:</b> " + res + "</p>";
+chat.scrollTop = chat.scrollHeight;
+input.value = "";
+}</p>`;
+
+let res="";
+if(msg.length>150){
+res="That looks copied 🚫. Try rewriting it in your own words.";
+}
+else if(msg.toLowerCase().includes("thesis")){
+res="Does your thesis clearly say helped or harmed AND include a group + evidence?";
+}
+else{
+res="What group was affected? What evidence proves it?";
 }
 
-chat.innerHTML += "<p><b>Coach Bot:</b> " + r + "</p>";
-msg.value = "";
+chat.innerHTML+=`<p><b>Coach Bot:</b> ${res}</p>`;
+chat.scrollTop=chat.scrollHeight;
+input.value="";
 }
 </script>
 
