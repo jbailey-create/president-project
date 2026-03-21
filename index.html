@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>President Project Hub v11</title>
+<title>President Project Hub FINAL</title>
 
 <style>
 body{
@@ -60,9 +60,74 @@ text-align:center;
 </header>
 
 <nav>
+<a href="#overview">Overview</a>
+<a href="#timeline">Timeline</a>
+<a href="#rubric">Rubric</a>
 <a href="#checklist">Checklist</a>
-<a href="#chatbot">Chatbot</a>
+<a href="#chatbot">Coach Bot</a>
 </nav>
+
+<section id="overview">
+<h2>Essential Question</h2>
+<p>How did your president affect rights and freedoms?</p>
+</section>
+
+<section id="timeline">
+<h2>Timeline</h2>
+<ul>
+<li>April 8–9: Introduction Notecards Due</li>
+<li>April 20: Body Notecards Due</li>
+<li>May 1: Final Presentation Due</li>
+<li>May 1–8: Presentations in class</li>
+</ul>
+</section>
+
+<section id="rubric">
+<h2>Rubric</h2>
+
+<h3>Content & Thinking (20)</h3>
+<ul>
+<li>20: Strong explanation of rights helped/harmed with detail</li>
+<li>15: Good explanation with some detail</li>
+<li>10: Basic ideas</li>
+<li>5: Limited understanding</li>
+</ul>
+
+<h3>Organization (20)</h3>
+<ul>
+<li>20: Clear thesis + 3 arguments + structure</li>
+<li>15: Mostly organized</li>
+<li>10: Some organization</li>
+<li>5: Disorganized</li>
+</ul>
+
+<h3>Evidence (20)</h3>
+<ul>
+<li>20: Strong evidence supports claims</li>
+<li>15: Some evidence</li>
+<li>10: Limited evidence</li>
+<li>5: No clear evidence</li>
+</ul>
+
+<h3>Visuals (20)</h3>
+<ul>
+<li>20: Clear, engaging slides</li>
+<li>15: Mostly clear</li>
+<li>10: Too much text</li>
+<li>5: Poor slides</li>
+</ul>
+
+<h3>Presentation (40)</h3>
+<ul>
+<li>40: Eye contact, ~5 minutes, no reading</li>
+<li>30: Some reading, mostly clear</li>
+<li>20: Frequent reading</li>
+<li>10: Unprepared</li>
+</ul>
+
+<p><strong>Total: /120</strong></p>
+
+</section>
 
 <section id="checklist">
 <h2>Checklist</h2>
@@ -90,7 +155,7 @@ text-align:center;
 
 <script>
 
-// PROGRESS SAVE
+// SAVE
 function save(){
 let boxes=document.querySelectorAll('#list input');
 boxes.forEach((cb,i)=>{
@@ -119,15 +184,26 @@ bar.innerText=pct+"%";
 
 window.onload=load;
 
-// SIMPLE BOT
+// BOT MEMORY
+let mem={g:false,e:false,i:false};
+
 function bot(){
 let m=msg.value;
 if(!m)return;
 
 chat.innerHTML+="<p>You: "+m+"</p>";
 
-let r="Be more specific.";
-if(m.length>100) r="Put that in your own words.";
+if(/people|group|americans/i.test(m))mem.g=true;
+if(/law|act|war|policy/i.test(m))mem.e=true;
+if(/affected|changed|helped|hurt/i.test(m))mem.i=true;
+
+let r="";
+
+if(m.length>120) r="Put that in your own words.";
+else if(!mem.g) r="Who was affected?";
+else if(!mem.e) r="What law or action proves that?";
+else if(!mem.i) r="How did rights change?";
+else r="Good—explain it clearly.";
 
 chat.innerHTML+="<p>Bot: "+r+"</p>";
 msg.value="";
